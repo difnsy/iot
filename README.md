@@ -9,7 +9,7 @@ Project ini adalah sistem **Absensi & Keamanan Berbasis Wajah** yang berjalan di
 ## 📺 Video Demo
 Lihat demonstrasi cara kerja sistem ini di YouTube:
 
-[![Tonton Video Demo](https://youtube.com/shorts/oq3I72Nmh1A?si=qqqamRNTMOFmsyBv)](https://youtube.com/shorts/oq3I72Nmh1A?si=qqqamRNTMOFmsyBv)
+[![Tonton Video Demo](https://img.youtube.com/vi/oq3I72Nmh1A/0.jpg)](https://youtube.com/shorts/oq3I72Nmh1A?si=qqqamRNTMOFmsyBv)
 
 *(Klik gambar di atas untuk memutar video)*
 
@@ -161,4 +161,4 @@ Mencatat data baru ke database saat wajah dikenali.
 * **Pencahayaan:** Pastikan pencahayaan cukup terang agar akurasi pengenalan wajah maksimal.
 
 ---
-**Dibuat oleh [Dani Ijlal Fitriansyah](https://github.com/difnsy)**
+**Copyright © 2026 [Dani Ijlal Fitriansyah](https://github.com/difnsy). All Rights Reserved.**
