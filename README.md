@@ -125,7 +125,7 @@ Mengambil daftar riwayat orang yang terdeteksi.
       {
         "id": 1,
         "nilai": 1,
-        "keterangan": "Sismadi",
+        "keterangan": "Dani",
         "waktu": "2026-01-22 16:01:05"
       },
       ...
@@ -161,4 +161,4 @@ Mencatat data baru ke database saat wajah dikenali.
 * **Pencahayaan:** Pastikan pencahayaan cukup terang agar akurasi pengenalan wajah maksimal.
 
 ---
-**Copyright © 2026 [Dani Ijlal Fitriansyah](https://github.com/difnsy). All Rights Reserved.**
+**© 2026 [Dani Ijlal Fitriansyah](https://github.com/difnsy). All Rights Reserved.**
