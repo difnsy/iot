@@ -1,219 +1,42 @@
-# Sistem Antrian Berbasis Face Recognition Pendaftaran Siswa
+# IoT Face Recognition + Cloudflare D1 Logger
 
-## 📋 Deskripsi Proyek
+Project ini adalah sistem **Absensi/Keamanan Berbasis Wajah** yang terintegrasi dengan IoT dan Cloud Database. Sistem ini berjalan sepenuhnya di browser (Client-Side) menggunakan OpenCV.js, namun tetap memiliki kemampuan logging data ke server (Serverless) dan kontrol perangkat keras lokal.
 
-Sistem antrian cerdas yang menggunakan teknologi **face recognition** untuk mengidentifikasi pengunjung secara otomatis. Sistem ini dilengkapi dengan simulasi jumlah loket, tiket, pengunjung, dan waktu pelayanan.
+🔗 **Live Demo:** [https://difnsy.github.io/iot/](https://difnsy.github.io/iot/)
 
-## 🎯 Fitur Utama
+---
 
-- **Facial Recognition** untuk identifikasi pengunjung
-- **Manajemen Antrian** otomatis
-- **Simulasi Real-time** kinerja sistem
-- **Dashboard Monitoring** untuk admin
-- **Laporan Statistik** performa antrian
+## 📺 Demo Video
+Tonton cara kerja sistem ini di YouTube:
+
+[![Tonton Video Demo](https://img.youtube.com/shorts/oq3I72Nmh1A?si=qqqamRNTMOFmsyBv.jpg)](https://youtube.com/shorts/oq3I72Nmh1A?si=qqqamRNTMOFmsyBv)
+
+*(Klik gambar di atas untuk memutar video)*
+
+---
+
+## 🚀 Fitur Utama
+
+1.  **Face Recognition di Browser**: Menggunakan **OpenCV.js** (LBP Cascade + Cosine Similarity) untuk mendeteksi dan mengenali wajah secara *real-time* tanpa perlu backend berat.
+2.  **Cloud Logging (Serverless)**: Setiap kali wajah dikenali, data dikirim ke **Cloudflare D1 Database** melalui **Cloudflare Workers**.
+3.  **IoT Hardware Control**: Terintegrasi dengan **Wemos D1 Mini (ESP8266)** untuk menyalakan indikator (LED/Relay) saat wajah terverifikasi.
+4.  **Dual Mode**: Bisa berjalan offline (hanya deteksi) atau online (dengan logging & IoT).
+
+## 🛠️ Teknologi yang Digunakan
+
+* **Frontend**: HTML5, CSS3, JavaScript (Vanilla).
+* **AI/CV Library**: OpenCV.js (WebAssembly).
+* **Backend API**: Cloudflare Workers.
+* **Database**: Cloudflare D1 (SQLite Serverless).
+* **Hardware**: Wemos D1 Mini / ESP8266.
 
 ## 🏗️ Arsitektur Sistem
 
 ```mermaid
-graph TD
-    A[Pengunjung] --> B[Kamera Face Recognition]
-    B --> C[Sistem Identifikasi]
-    C --> D[Database Wajah]
-    D --> E[Penugasan Antrian]
-    E --> F[Loket Pelayanan]
-    F --> G[Laporan & Statistik]
-```
-
-## 📊 Komponen Simulasi
-
-### 1. **Konfigurasi Loket**
-```
-┌─────────────┬─────────────┬─────────────┐
-│   LOKET 1   │   LOKET 2   │   LOKET 3   │
-│  Status:    │  Status:    │  Status:    │
-│  [AKTIF]    │  [ISTIRAHAT]│  [AKTIF]    │
-└─────────────┴─────────────┴─────────────┘
-```
-
-### 2. **Parameter Simulasi**
-
-| Parameter | Nilai Default | Range |
-|-----------|---------------|--------|
-| Jumlah Loket | 3 | 1-10 |
-| Pengunjung/Jam | 50 | 10-200 |
-| Waktu Pelayanan | 5 menit | 1-15 menit |
-| Akurasi Face Recognition | 95% | 85-99% |
-
-## 🖥️ Interface Sistem
-
-
-### Antrian App
-
-[antrian app](https://sismadi.github.io/simulasi-pemodelan/)
-
-
-### Dashboard Admin
-![Dashboard Antrian](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=Dashboard+Monitoring+Antrian)
-
-**Fitur Dashboard:**
-- Real-time monitoring antrian
-- Grafik jumlah pengunjung
-- Status loket pelayanan
-- Notifikasi sistem
-
-### Antrian Pengunjung
-![Tampilan Antrian](https://via.placeholder.com/600x300/27AE60/FFFFFF?text=Display+Antrian+Live)
-
-## ⚙️ Teknologi yang Digunakan
-
-```python
-# Contoh kode face recognition
- <!-- OpenCV.js -->
-  <script async src="https://docs.opencv.org/4.x/opencv.js" onload="onOpenCvReady()"></script>
- ```
-
-## 📈 Simulasi Performa
-
-### Grafik Waktu Tunggu
-![Grafik Waktu Tunggu](https://via.placeholder.com/600x300/F39C12/FFFFFF?text=Simulasi+Waktu+Tunggu+Antrian)
-
-### Statistik Harian
-| Metric | Nilai |
-|--------|-------|
-| Total Pengunjung | 150 |
-| Rata-rata Waktu Tunggu | 8.5 menit |
-| Kepuasan Pelanggan | 92% |
-| Akurasi Recognition | 96.2% |
-
-## 🔧 Konfigurasi Hardware
-
-### Spesifikasi Minimum
-- **Processor**: Intel i5 atau setara
-- **RAM**: 8GB DDR4
-- **Storage**: 256GB SSD
-- **Kamera**: 1080p Webcam
-- **OS**: Windows 10/11 atau Linux Ubuntu
-
-### Spesifikasi Recommended
-- **Processor**: Intel i7 atau Ryzen 7
-- **RAM**: 16GB DDR4
-- **Storage**: 512GB NVMe SSD
-- **Kamera**: 4K Webcam atau IP Camera
-- **GPU**: NVIDIA GTX 1660 (untuk processing lebih cepat)
-
-## 🚀 Instalasi dan Setup
-
-### 1. **Prasyarat Sistem**
-```bash
-# Install dependencies
-pip install opencv-python
-pip install face-recognition
-pip install numpy
-pip install pandas
-```
-
-### 2. **Konfigurasi Instalasi Database**
-```python
-# config.py
-
-SYSTEM_CONFIG = {
-    'max_queues': 5,
-    'recognition_threshold': 0.6,
-    'max_wait_time': 30,  # menit
-    'auto_assign': True
-}
-```
-
-## 📋 Flow Proses
-
-1. **Pendaftaran Wajah** → Pengunjung melakukan registrasi wajah
-2. **Identifikasi** → Sistem mengenali wajah yang terdaftar
-3. **Penugasan Antrian** → Otomatis menugaskan ke loket tersedia
-4. **Pelayanan** → Proses di loket
-5. **Update Status** → Sistem memperbarui status antrian
-
-## 🎮 Simulasi Kontrol
-
-### Panel Kontrol Admin
-![Panel Kontrol](https://via.placeholder.com/700x400/8E44AD/FFFFFF?text=Panel+Kontrol+Simulasi)
-
-**Kontrol yang Tersedia:**
-- ✅ Tambah/Pindah Loket
-- ✅ Atur Kecepatan Simulasi
-- ✅ Generate Laporan
-- ✅ Reset Sistem
-
-## 📊 Metrik Kinerja
-
-### Key Performance Indicators (KPI)
-1. **Waktu Tunggu Rata-rata**
-2. **Akurasi Pengenalan Wajah**
-3. **Utilisasi Loket**
-4. **Throughput Sistem**
-
-## 🔄 Workflow Sistem
-
-```mermaid
-sequenceDiagram
-    participant P as Pengunjung
-    participant C as Kamera
-    participant S as Sistem FR
-    participant Q as Antrian
-    participant L as Loket
-    
-    P->>C: Mendekati kamera
-    C->>S: Kirim gambar wajah
-    S->>S: Proses recognition
-    S->>Q: Assign nomor antrian
-    Q->>L: Informasi pengunjung
-    L->>P: Memanggil nomor antrian
-    P->>L: Mendapat pelayanan
-```
-
-## 💾 Database Schema
-
-### Tabel Pengunjung
-```sql
-CREATE TABLE visitors (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    face_encoding BLOB,
-    name VARCHAR(100),
-    registration_date DATETIME,
-    last_visit DATETIME,
-    total_visits INT DEFAULT 0
-);
-```
-
-### Tabel Antrian
-```sql
-CREATE TABLE queue (
-    queue_id INT PRIMARY KEY AUTO_INCREMENT,
-    visitor_id INT,
-    assigned_counter INT,
-    queue_number VARCHAR(10),
-    status ENUM('waiting', 'serving', 'completed'),
-    created_at DATETIME,
-    served_at DATETIME
-);
-```
-
-## 🛠️ Troubleshooting
-
-### Common Issues & Solutions
-
-| Masalah | Penyebab | Solusi |
-|---------|----------|---------|
-| Low recognition accuracy | Pencahayaan buruk | Perbaiki lighting |
-| Slow processing | Hardware lemah | Upgrade RAM/GPU |
-| System crash | Memory leak | Restart service |
-
-## 📞 Support
-
-Untuk bantuan teknis dan support:
-- **Email**: support@queuesystem.com
-- **Hotline**: 1500-123
-- **Documentation**: docs.queuesystem.com
-
----
-
-**Sistem Antrian Face Recognition** © 2024 - All Rights Reserved
+graph LR
+    A[Browser / Kamera] -->|Deteksi Wajah| B(OpenCV.js)
+    B -->|Verified| C{Action}
+    C -->|Log Data| D[Cloudflare Worker]
+    D -->|Insert| E[(Database D1)]
+    C -->|Trigger| F[Wemos / ESP8266]
+    F -->|Output| G[Lampu / Door Lock]
